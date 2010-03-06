@@ -109,9 +109,9 @@ module Octopi
     end
 
     def collaborators
-      property('collaborators', [self.owner, self.name].join('/')).values.map { |v| User.find(v.join) }
-    end  
-    
+      property('collaborators', [self.owner, self.name].join('/'))['collaborators'].map { |v| User.find(v) }
+    end
+
     def self.create(options={})
       raise AuthenticationRequired, "To create a repository you must be authenticated." if Api.api.read_only?
       self.validate_args(options[:name] => :repo)

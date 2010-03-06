@@ -15,5 +15,9 @@ class RepositoryTest < Test::Unit::TestCase
         assert_not_nil @user.repository(:name => "select-copiers")
       end
     end
+
+    should "return a list of collaborators for a repository with more than one collaborator" do
+      assert Repository.find(:user => 'rails', :repo => 'rails').collaborators.size > 1
+    end
   end
 end

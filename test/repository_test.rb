@@ -97,8 +97,10 @@ class RepositoryTest < Test::Unit::TestCase
     should "be able to find all collaborators" do
       @collaborators = @repository.collaborators
       assert_not_nil @collaborators
-      assert_equal 1, @collaborators.size
-      assert @collaborators.first.is_a?(User)
+      assert_equal 4, @collaborators.size
+      @collaborators.each do |collab|
+        assert collab.is_a?(User)
+      end
     end
     
     should "be able to create a repository" do
