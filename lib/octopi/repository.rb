@@ -108,8 +108,14 @@ module Octopi
       Issue.find(:user => self.owner, :repo => self, :number => number)
     end
 
+    # Return a list of Octopi::User objects of the repository's collaborators (uses N+1 API calls)
     def collaborators
       property('collaborators', [self.owner, self.name].join('/'))['collaborators'].map { |v| User.find(v) }
+    end
+
+    # Return only the login of the collaborators (uses one API call)
+    def collaborator_logins
+      property('collaborators', [self.owner, self.name].join('/'))['collaborators']
     end
 
     def self.create(options={})

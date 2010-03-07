@@ -103,6 +103,15 @@ class RepositoryTest < Test::Unit::TestCase
       end
     end
     
+    should "be able to list collaborators by login only" do
+      @collaborators = @repository.collaborator_logins
+      assert_not_nil @collaborators
+      assert_equal 4, @collaborators.size
+      @collaborators.each do |collab|
+        assert collab.is_a?(String)
+      end
+    end
+
     should "be able to create a repository" do
       auth do 
         Repository.create(:name => "octopus")
